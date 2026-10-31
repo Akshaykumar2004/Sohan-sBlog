@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Star Journal — an independent personal blog about the latest Mercedes-Benz cars, design and electric mobility.">
+  <title>The Star Journal — Mercedes-Benz, in focus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17191d; --muted: #73777e; --paper: #f5f4f1; --white: #fff;
+      --line: #e5e3df; --accent: #b99a65; --dark: #101317;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: "DM Sans", sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .topline { height: 4px; background: var(--accent); }
+    header { background: rgba(245,244,241,.94); position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .nav { max-width: 1180px; margin: auto; padding: 19px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-family: "Playfair Display", serif; font-size: 25px; font-weight: 700; letter-spacing: -.7px; }
+    .brand span { color: var(--accent); }
+    .navlinks { display: flex; gap: 27px; align-items: center; font-size: 12px; text-transform: uppercase; letter-spacing: 1.2px; color: #555960; }
+    .navlinks a:hover { color: var(--accent); }
+    .menu-btn { display: none; border: 0; background: none; font-size: 23px; cursor: pointer; }
+    .wrap { max-width: 1180px; margin: auto; padding: 0 24px; }
+    .eyebrow { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+    .hero { padding: 42px 0 65px; }
+    .hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; min-height: 490px; background: var(--dark); color: white; overflow: hidden; }
+    .hero-copy { padding: clamp(35px, 6vw, 76px); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+    .hero h1 { font-family: "Playfair Display", serif; font-size: clamp(42px, 5vw, 66px); line-height: 1.06; letter-spacing: -1.7px; font-weight: 500; margin: 20px 0; }
+    .hero p { color: #c5c7ca; line-height: 1.8; max-width: 440px; font-size: 14px; }
+    .byline { margin: 25px 0 28px; color: #aeb1b5; font-size: 11px; letter-spacing: .8px; text-transform: uppercase; }
+    .byline b { color: white; font-weight: 600; }
+    .cta { display: inline-flex; align-items: center; gap: 13px; padding: 13px 18px; background: var(--accent); color: #141414; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; transition: .2s; }
+    .cta:hover { background: #d1b681; transform: translateY(-2px); }
+    .hero-image { min-height: 380px; background: linear-gradient(0deg,rgba(0,0,0,.15),transparent), url("https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1500&q=85") center/cover; }
+    .intro { display: flex; justify-content: space-between; align-items: end; gap: 20px; padding: 5px 0 25px; border-bottom: 1px solid var(--line); }
+    .intro h2, .section-title { font: 500 clamp(28px,3vw,38px)/1.15 "Playfair Display",serif; margin: 9px 0 0; }
+    .intro p { color: var(--muted); font-size: 13px; max-width: 350px; line-height: 1.7; margin: 0; }
+    .filters { display: flex; gap: 9px; flex-wrap: wrap; padding: 23px 0 25px; }
+    .filter { border: 1px solid #d9d7d2; color: #656970; background: transparent; padding: 9px 15px; border-radius: 30px; font-size: 11px; cursor: pointer; }
+    .filter.active, .filter:hover { background: var(--dark); color: white; border-color: var(--dark); }
+    .posts { display: grid; grid-template-columns: repeat(3,1fr); gap: 25px; padding-bottom: 75px; }
+    .post { background: var(--white); min-width: 0; transition: transform .25s, box-shadow .25s; }
+    .post:hover { transform: translateY(-5px); box-shadow: 0 16px 35px #17191d12; }
+    .post-image { height: 220px; background-size: cover; background-position: center; position: relative; }
+    .tag { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,.94); padding: 7px 10px; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .post-body { padding: 23px 22px 25px; }
+    .meta { color: var(--muted); font-size: 10px; letter-spacing: .8px; text-transform: uppercase; }
+    .post h3 { font: 600 23px/1.2 "Playfair Display",serif; margin: 12px 0 10px; }
+    .post p { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 0 0 20px; }
+    .read { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; border-bottom: 1px solid var(--accent); padding-bottom: 5px; }
+    .feature { background: #e9e7e1; padding: 65px 0; }
+    .feature-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 55px; align-items: center; }
+    .feature-image { height: 370px; background: url("https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1400&q=85") center/cover; }
+    .feature-copy h2 { font: 500 clamp(32px,4vw,47px)/1.1 "Playfair Display",serif; margin: 15px 0; }
+    .feature-copy p { color: #666a70; font-size: 13px; line-height: 1.9; max-width: 500px; }
+    .newsletter { text-align: center; padding: 76px 20px 82px; background: var(--dark); color: white; }
+    .newsletter h2 { font: 500 37px "Playfair Display",serif; margin: 12px 0; }
+    .newsletter p { color: #b9bdc1; font-size: 13px; line-height: 1.7; }
+    .subscribe { display: flex; max-width: 430px; margin: 25px auto 0; }
+    .subscribe input { min-width: 0; flex: 1; padding: 14px; border: 0; outline: none; font: inherit; font-size: 12px; }
+    .subscribe button { border: 0; padding: 0 18px; background: var(--accent); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+    footer { background: #0b0d10; color: #a7aaae; padding: 25px 24px; font-size: 10px; }
+    .footer-inner { max-width: 1180px; margin: auto; display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    .notice { max-width: 1180px; margin: 0 auto; padding: 0 24px 25px; color: #8a8d91; font-size: 10px; line-height: 1.6; }
+    @media (max-width: 800px) {
+      .hero-grid, .feature-grid { grid-template-columns: 1fr; }
+      .hero-image { min-height: 330px; grid-row: 1; }
+      .hero-copy { padding: 38px 30px 45px; }
+      .posts { grid-template-columns: repeat(2,1fr); }
+      .feature-grid { gap: 30px; }
+      .feature-image { height: 300px; }
+    }
+    @media (max-width: 560px) {
+      .nav { padding: 16px 20px; }
+      .menu-btn { display: block; }
+      .navlinks { display: none; position: absolute; top: 62px; left: 0; right: 0; padding: 20px; background: var(--paper); border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; }
+      .navlinks.open { display: flex; }
+      .wrap { padding: 0 18px; }
+      .hero { padding-top: 22px; }
+      .hero-image { min-height: 245px; }
+      .posts { grid-template-columns: 1fr; gap: 18px; padding-bottom: 55px; }
+      .post-image { height: 235px; }
+      .intro { display: block; }
+      .intro p { margin-top: 12px; }
+      .subscribe { flex-direction: column; gap: 8px; }
+      .subscribe button { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#">THE STAR<span>.</span> JOURNAL</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+      <div class="navlinks" id="navLinks">
+        <a href="#latest">Latest stories</a><a href="#electric">Electric era</a><a href="#about">About</a><a href="#newsletter">Newsletter</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">The independent Mercedes-Benz journal</div>
+          <h1>Beyond the badge.<br>Into the future.</h1>
+          <p>A personal take on the machines, design details and technology shaping the next chapter of Mercedes-Benz.</p>
+          <div class="byline">Words by <b>Alex Morgan</b> &nbsp;·&nbsp; October 2026</div>
+          <a class="cta" href="#latest">Explore the stories <span>↗</span></a>
+        </div>
+        <div class="hero-image" role="img" aria-label="Luxury Mercedes-Benz car"></div>
+      </div>
+    </section>
+
+    <section class="wrap" id="latest">
+      <div class="intro">
+        <div><div class="eyebrow">Notes from the road</div><h2>Latest stories</h2></div>
+        <p>New launches, thoughtful design and the details that make every drive memorable.</p>
+      </div>
+      <div class="filters" aria-label="Filter stories">
+        <button class="filter active" data-filter="all">All stories</button>
+        <button class="filter" data-filter="electric">Electric</button>
+        <button class="filter" data-filter="sedan">Sedans</button>
+        <button class="filter" data-filter="suv">SUVs</button>
+        <button class="filter" data-filter="design">Design & tech</button>
+      </div>
+
+      <div class="posts" id="postGrid">
+        <article class="post" data-category="electric">
+          <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1000&q=80')"><span class="tag">Electric</span></div>
+          <div class="post-body"><div class="meta">October 24, 2026 &nbsp;·&nbsp; 5 min read</div><h3>The new CLA: a fresh electric chapter</h3><p>A closer look at the sleek proportions, digital-first cabin and ambitions of the latest all-electric CLA.</p><a class="read" href="https://www.mercedes-benz.co.in/" target="_blank" rel="noreferrer">Explore the CLA ↗</a></div>
+        </article>
+        <article class="post" data-category="suv">
+          <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80')"><span class="tag">SUV</span></div>
+          <div class="post-body"><div class="meta">October 18, 2026 &nbsp;·&nbsp; 4 min read</div><h3>GLA takes a confident new direction</h3><p>The next GLA brings a more expressive shape and a new take on everyday premium versatility.</p><a class="read" href="https://media.mbusa.com/vehicles" target="_blank" rel="noreferrer">Read the update ↗</a></div>
+        </article>
+        <article class="post" data-category="sedan electric">
+          <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1000&q=80')"><span class="tag">Electric sedan</span></div>
+          <div class="post-body"><div class="meta">October 12, 2026 &nbsp;·&nbsp; 6 min read</div><h3>What an electric C-Class could mean</h3><p>Familiar C-Class character meets a purpose-built electric platform. Here are the details worth watching.</p><a class="read" href="https://media.mbusa.com/c-class-sedan" target="_blank" rel="noreferrer">Read the news ↗</a></div>
+        </article>
+        <article class="post" data-category="electric suv">
+          <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1000&q=80')"><span class="tag">Electric SUV</span></div>
+          <div class="post-body"><div class="meta">October 05, 2026 &nbsp;·&nbsp; 4 min read</div><h3>GLC Electric: the SUV goes electric</h3><p>Why the electric GLC is an important addition to the brand's next generation of premium vehicles.</p><a class="read" href="https://group.mercedes-benz.com/company/divisions/mercedes-benz-cars/" target="_blank" rel="noreferrer">Discover more ↗</a></div>
+        </article>
+        <article class="post" data-category="design">
+          <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80')"><span class="tag">Design & tech</span></div>
+          <div class="post-body"><div class="meta">September 28, 2026 &nbsp;·&nbsp; 3 min read</div><h3>Inside the modern Mercedes cabin</h3><p>From connected displays to ambient lighting, the cabin is becoming a digital space as much as a cockpit.</p><a class="read" href="https://www.mercedes-benz.co.in/" target="_blank" rel="noreferrer">Explore the brand ↗</a></div>
+        </article>
+        <article class="post" data-category="suv">
+          <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1000&q=80')"><span class="tag">SUV</span></div>
+          <div class="post-body"><div class="meta">September 16, 2026 &nbsp;·&nbsp; 5 min read</div><h3>The enduring appeal of the G-Class</h3><p>Iconic proportions, unmistakable presence and a design that has stayed recognisable through generations.</p><a class="read" href="https://www.mercedes-benz.co.in/" target="_blank" rel="noreferrer">Discover the range ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="feature" id="electric">
+      <div class="wrap feature-grid">
+        <div class="feature-image" role="img" aria-label="Mercedes-inspired automotive design detail"></div>
+        <div class="feature-copy">
+          <div class="eyebrow">A new kind of movement</div>
+          <h2>The electric era is more than a new powertrain.</h2>
+          <p>Mercedes-Benz is expanding its electric portfolio while continuing to develop combustion and hybrid options. The interesting story is how design, software, charging and the driving experience evolve together.</p>
+          <p>This journal follows those changes from a car enthusiast's point of view — one launch, one detail and one drive at a time.</p>
+          <a class="read" href="https://group.mercedes-benz.com/company/divisions/mercedes-benz-cars/" target="_blank" rel="noreferrer">Follow the evolution ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter">
+      <div class="eyebrow">Letters from the driver's seat</div>
+      <h2>Stay in the loop.</h2>
+      <p>Occasional notes on new models, design and the future of driving.</p>
+      <form class="subscribe" id="subscribeForm">
+        <input type="email" placeholder="Your email address" aria-label="Your email address" required>
+        <button type="submit">Subscribe ↗</button>
+      </form>
+      <p id="formMessage" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <div class="notice">Editorial concept / fan blog. This is an independent, unofficial website and is not affiliated with, endorsed by, or sponsored by Mercedes-Benz. Model details and availability vary by market; verify specifications with the official local website.</div>
+  <footer><div class="footer-inner"><span>© 2026 THE STAR JOURNAL</span><span>Written for people who love the drive.</span><span>Independent automotive blog</span></div></footer>
+
+  <script>
+    const filters = document.querySelectorAll(".filter");
+    const posts = document.querySelectorAll(".post");
+    filters.forEach(button => button.addEventListener("click", () => {
+      filters.forEach(item => item.classList.remove("active"));
+      button.classList.add("active");
+      const selected = button.dataset.filter;
+      posts.forEach(post => {
+        const categories = post.dataset.category.split(" ");
+        post.style.display = selected === "all" || categories.includes(selected) ? "" : "none";
+      });
+    }));
+
+    document.getElementById("menuBtn").addEventListener("click", () => {
+      document.getElementById("navLinks").classList.toggle("open");
+    });
+
+    document.querySelectorAll("#navLinks a").forEach(link => link.addEventListener("click", () => {
+      document.getElementById("navLinks").classList.remove("open");
+    }));
+
+    document.getElementById("subscribeForm").addEventListener("submit", event => {
+      event.preventDefault();
+      document.getElementById("formMessage").textContent =
+        "Thanks for your interest! Connect this form to an email service to collect subscriptions.";
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>
